@@ -17,11 +17,13 @@ project("myopengles")
 include_directories(
         utils
         glm
+        render
 )
 
 file(GLOB src-files
         ${CMAKE_SOURCE_DIR}/*.cpp
         ${CMAKE_SOURCE_DIR}/utils/*.cpp
+        ${CMAKE_SOURCE_DIR}/render/*.cpp
         )
 
 add_library( # Sets the name of the library.
