@@ -42,7 +42,9 @@ void TextureSample::Init() {
             "uniform sampler2D s_TextureMap;                     \n"
             "void main()                                         \n"
             "{                                                   \n"
-            "  outColor = texture(s_TextureMap, v_texCoord);     \n"
+            "  vec4 tempColor = texture(s_TextureMap, v_texCoord);\n"
+            "  float luminance = tempColor.r * 0.299 + tempColor.g * 0.587 + tempColor.b * 0.114;\n"
+            "  outColor = vec4(vec3(luminance), tempColor.a);     \n"
             "  //outColor = texelFetch(s_TextureMap,  ivec2(int(v_texCoord.x * 404.0), int(v_texCoord.y * 336.0)), 0);\n"
             "}                                                   \n";
 
