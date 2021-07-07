@@ -27,4 +27,8 @@ class MyGLRender : GLSurfaceView.Renderer {
     public fun unInit() {
         mNativeRender.native_UnInit()
     }
+
+    fun setImageData(format: Int, width: Int, height: Int, bytes: ByteArray) {
+        mNativeRender.native_SetImageData(format, width, height, bytes)
+    }
 }

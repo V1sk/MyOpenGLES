@@ -18,12 +18,14 @@ include_directories(
         utils
         glm
         render
+        sample
 )
 
 file(GLOB src-files
         ${CMAKE_SOURCE_DIR}/*.cpp
         ${CMAKE_SOURCE_DIR}/utils/*.cpp
         ${CMAKE_SOURCE_DIR}/render/*.cpp
+        ${CMAKE_SOURCE_DIR}/sample/*.cpp
         )
 
 add_library( # Sets the name of the library.

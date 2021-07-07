@@ -7,12 +7,15 @@
 
 #include <GLES3/gl3.h>
 #include "GLUtils.h"
+#include "GLSampleBase.h"
 
 class CoGLRenderContext {
 
     CoGLRenderContext();
 
 public:
+
+    void setImageData(int format, int width, int height, uint8_t *pData);
 
     void onSurfaceCreated();
 
@@ -28,6 +31,7 @@ private:
     static CoGLRenderContext *m_pContext;
     int mScreenW;
     int mScreenH;
+    GLSampleBase *m_pSample;
 
 };
 
