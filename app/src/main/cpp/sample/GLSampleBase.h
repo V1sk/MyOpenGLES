@@ -9,6 +9,8 @@
 #include <GLES3/gl3.h>
 #include <ImageDef.h>
 
+#define SHADER_TO_STRING(s) #s
+
 class GLSampleBase {
 
 public:
@@ -26,6 +28,8 @@ public:
     }
 
     virtual void LoadImage(NativeImage *pImage) {};
+
+    virtual void LoadLutImage(NativeImage *pImage) {};
 
     virtual void Init() = 0;
 

@@ -2,20 +2,22 @@
 // Created by coocent-camera002 on 2021/7/7.
 //
 
-#ifndef MYOPENGLES_TEXTURESAMPLE_H
-#define MYOPENGLES_TEXTURESAMPLE_H
+#ifndef MYOPENGLES_LUT3DRENDER_H
+#define MYOPENGLES_LUT3DRENDER_H
 
 #include "GLSampleBase.h"
 #include "GLUtils.h"
 
-class TextureSample : public GLSampleBase {
+class Lut3dRender : public GLSampleBase {
 
 public:
-    TextureSample();
+    Lut3dRender();
 
-    ~TextureSample();
+    ~Lut3dRender();
 
     void LoadImage(NativeImage *pImage);
+
+    void LoadLutImage(NativeImage *pImage);
 
     void Init();
 
@@ -25,10 +27,13 @@ public:
 
 private:
     GLuint m_TextureId;
+    GLuint m_LutTextureId;
     GLint m_SamplerLoc;
+    GLint m_LutSamplerLoc;
     NativeImage m_RenderImage;
+    NativeImage m_LutImage;
 
 };
 
 
-#endif //MYOPENGLES_TEXTURESAMPLE_H
+#endif //MYOPENGLES_LUT3DRENDER_H

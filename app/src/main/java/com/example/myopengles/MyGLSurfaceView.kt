@@ -34,7 +34,8 @@ class MyGLSurfaceView @JvmOverloads constructor(
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
         mRender.onSurfaceChanged(gl, width, height)
-        loadRGBAImage(R.drawable.front)
+        loadRGBAImage(R.drawable.left)
+        setLutImage(R.drawable.lomo_5_1)
     }
 
     override fun onDrawFrame(gl: GL10?) {
@@ -52,6 +53,28 @@ class MyGLSurfaceView @JvmOverloads constructor(
                 bitmap.copyPixelsToBuffer(buf)
                 val byteArray = buf.array()
                 mRender.setImageData(IMAGE_FORMAT_RGBA, bitmap.width, bitmap.height, byteArray)
+            }
+        } finally {
+            try {
+                `is`.close()
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+        return bitmap
+    }
+
+    private fun setLutImage(resId: Int): Bitmap? {
+        val `is` = this.resources.openRawResource(resId)
+        val bitmap: Bitmap?
+        try {
+            bitmap = BitmapFactory.decodeStream(`is`)
+            if (bitmap != null) {
+                val bytes = bitmap.byteCount
+                val buf = ByteBuffer.allocate(bytes)
+                bitmap.copyPixelsToBuffer(buf)
+                val byteArray = buf.array()
+                mRender.setLutImageData(IMAGE_FORMAT_RGBA, bitmap.width, bitmap.height, byteArray)
             }
         } finally {
             try {

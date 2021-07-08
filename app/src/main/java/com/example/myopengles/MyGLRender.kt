@@ -31,4 +31,8 @@ class MyGLRender : GLSurfaceView.Renderer {
     fun setImageData(format: Int, width: Int, height: Int, bytes: ByteArray) {
         mNativeRender.native_SetImageData(format, width, height, bytes)
     }
+
+    fun setLutImageData(format: Int, width: Int, height: Int, bytes: ByteArray) {
+        mNativeRender.native_SetLutImageData(format, width, height, bytes)
+    }
 }

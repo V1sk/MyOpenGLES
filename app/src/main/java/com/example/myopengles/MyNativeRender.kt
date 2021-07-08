@@ -20,4 +20,6 @@ class MyNativeRender {
     external fun native_UnInit()
 
     external fun native_SetImageData(format: Int, width: Int, height: Int, bytes: ByteArray)
+
+    external fun native_SetLutImageData(format: Int, width: Int, height: Int, bytes: ByteArray)
 }

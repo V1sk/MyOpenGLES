@@ -46,3 +46,16 @@ Java_com_example_myopengles_MyNativeRender_native_1SetImageData(JNIEnv *env, job
     delete[] buf;
     env->DeleteLocalRef(imageData);
 }
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_example_myopengles_MyNativeRender_native_1SetLutImageData(JNIEnv *env, jobject thiz,
+                                                                   jint format, jint width,
+                                                                   jint height, jbyteArray imageData) {
+    int len = env->GetArrayLength(imageData);
+    auto *buf = new uint8_t[len];
+    env->GetByteArrayRegion(imageData, 0, len, reinterpret_cast<jbyte *>(buf));
+    CoGLRenderContext::getInstance()->setLutImageData(format, width, height, buf);
+    delete[] buf;
+    env->DeleteLocalRef(imageData);
+}

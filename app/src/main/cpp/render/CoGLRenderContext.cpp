@@ -3,7 +3,7 @@
 //
 
 #include "CoGLRenderContext.h"
-#include "TextureSample.h"
+#include "Lut3dRender.h"
 
 CoGLRenderContext *CoGLRenderContext::m_pContext = nullptr;
 
@@ -40,7 +40,7 @@ void CoGLRenderContext::onDrawFrame() {
 CoGLRenderContext::CoGLRenderContext() {
     this->mScreenW = 0;
     this->mScreenH = 0;
-    m_pSample = new TextureSample();
+    m_pSample = new Lut3dRender();
 }
 
 void CoGLRenderContext::setImageData(int format, int width, int height, uint8_t *pData) {
@@ -65,5 +65,30 @@ void CoGLRenderContext::setImageData(int format, int width, int height, uint8_t 
         }
         m_pSample->Init();
         m_pSample->LoadImage(&nativeImage);
+    }
+}
+
+void CoGLRenderContext::setLutImageData(int format, int width, int height, uint8_t *pData) {
+    if (m_pSample) {
+        NativeImage nativeImage;
+        nativeImage.format = format;
+        nativeImage.width = width;
+        nativeImage.height = height;
+        nativeImage.ppPlane[0] = pData;
+
+        switch (format) {
+            case IMAGE_FORMAT_NV12:
+            case IMAGE_FORMAT_NV21:
+                nativeImage.ppPlane[1] = nativeImage.ppPlane[0] + width * height;
+                break;
+            case IMAGE_FORMAT_I420:
+                nativeImage.ppPlane[1] = nativeImage.ppPlane[0] + width * height;
+                nativeImage.ppPlane[2] = nativeImage.ppPlane[1] + width * height / 4;
+                break;
+            default:
+                break;
+        }
+        m_pSample->Init();
+        m_pSample->LoadLutImage(&nativeImage);
     }
 }
